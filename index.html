@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUÍA SOAP CRUD</title>
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" id="mode" href="https://bootswatch.com/4/flatly/bootstrap.min.css">
+
+    <!-- HIGHLIGHT CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js">
+    </script>
+    <link rel="stylesheet" href="vendor/css/atom-one-dark.css">
+
+    <!-- MATERIAL DESIGN ICONS -->
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.2.45/css/materialdesignicons.min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark py-3">
+        <a class="navbar-brand" href="#">CRUD SOAP - DATABASE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li> -->
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" target="_blank" href="#"><span class="mdi mdi-youtube"></span> YOUTUBE <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" target="_blank" href="https://github.com/aimarandony/soap-crud-java"><span class="mdi mdi-github"></span> GITHUB <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+
+        <div class="alert alert-dismissible alert-secondary mt-4">
+            Empezaremos creando la base de datos. 🔋
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                ◘ Creamos la Base de Datos
+            </div>
+            <div class="card-body">
+                <div class="alert alert-dismissible alert-primary">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    En esta ocación estaremos usando como base de datos a <strong>MySQL</strong>
+                </div>
+                <pre><code class="sql">create database BDSOAP;
+use BDSOAP;
+
+create table CLIENTES (
+    id int not null auto_increment,
+    nombre varchar(100), 
+    apellido varchar(100),
+    dni char(8),
+    primary key (id)
+);
+
+insert into CLIENTES values 
+(null,'Lucas','Kingston','78495612'),
+(null,'Marcos','Tulio','76451245'),
+(null,'Joel','Llano','78579484');
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible alert-secondary mt-4">
+            Ahora crearemos nuestro Proyecto <strong>SOAP</strong>, con ayuda del IDE <strong>"Netbeans IDE
+                8.2"</strong>. 🎨
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-creation mt-2">
+                    <div class="card-header">
+                        1) Creamos un proyecto <strong>Web Application</strong>, luego damos click en
+                        <strong>Next</strong>.
+                    </div>
+                    <div class="card-body">
+                        <a href="img/1.png" target="_blank">
+                            <img src="img/1.png" alt="Paso 1" width="100%" height="100%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-creation mt-2">
+                    <div class="card-header">
+                        2) Luego seleccionamos la ruta en donde queremos guardar nuestro proyecto, y presionamos en
+                        <strong>Next</strong>.
+                    </div>
+                    <div class="card-body">
+                        <a href="img/2.png" target="_blank">
+                            <img src="img/2.png" alt="Paso 2" width="100%" height="100%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-creation mt-2">
+                    <div class="card-header">
+                        3) Ahora seleccionamos el servidor donde va a ejecutar nuestro proyecto, en este caso
+                        <strong>Apache Tomcat</strong> y damos click en <strong>Finish</strong>.
+                    </div>
+                    <div class="card-body">
+                        <a href="img/3.png" target="_blank">
+                            <img src="img/3.png" alt="Paso 3" width="100%" height="100%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="card card-creation mt-2">
+                    <div class="card-header">
+                        4) La estructura de nuestro proyecto nos quedará de esta forma.
+                    </div>
+                    <div class="card-body">
+                        <a href="img/4.png" target="_blank">
+                            <img src="img/4.png" alt="Paso 4" width="100%" height="100%">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible alert-alert mt-4">
+            Ahora para poder trabajar con <strong>MySQL</strong>, procedemos a agregar la librería o .jar del Driver de
+            MySQL. <br>
+            En este caso estaremos agregando la librería que nos proporciona el IDE. ⚡
+        </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                > 1 - Presionamos Click Derecho sobre <strong>Libraries</strong> y damos click en <strong>Add Library
+                    ..</strong>. <br>
+                > 2 - Luego nos aparecera una ventana, donde escogemos <strong>MySQL JDBC Driver</strong>. <br>
+                > 3 - Finalmente damos click en <strong>Add Library</strong> y veremos que nuestra librería se agrego
+                correctammente.
+            </div>
+            <div class="card-body">
+                <a href="img/5.png" target="_blank">
+                    <img src="img/5.png" alt="Paso 5" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible alert-secondary mt-4">
+            Ahora crearemos la estructura de nuestro proyecto. 🧮
+        </div>
+        <div class="card mt-2">
+            <div class="card-header">
+                > 1 - Presionamos Click Derecho en <strong>Source Package</strong>, luego click en <strong>New</strong>
+                y <strong>Java Class...</strong>. <br>
+                > 2 - Luego nos aparecera una ventana, donde escribimos el nombre de nuestra clase (<strong>Class
+                    Name</strong>) y el nombre del paquete (<strong>Package</strong>). <br>
+                > 3 - Finalmente damos click en <strong>Finish</strong> y se creara nuestra clase dentro del paqute
+                correspondiente. <br>
+                > 4 - Repetimos estos pasos hasta tener la estructura de la imagen.
+            </div>
+            <div class="card-body">
+                <a href="img/6.png" target="_blank">
+                    <img src="img/6.png" alt="Paso 6" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header">
+                > 1 - Presionamos Click Derecho en <strong>Source Package</strong>, luego click en <strong>New</strong>
+                y <strong>Web Services...</strong>. <br>
+                > 2 - Luego nos aparecera una ventana, donde escribimos el nombre de nuestro Servicio (<strong>Web
+                    Service Name</strong>) y el nombre del paquete (<strong>Package</strong>). <br>
+                > 3 - Seguidamente damos click en <strong>Finish</strong> y nos aparecerá una ventana de confirmación.
+                Le damos click en <strong>Yes</strong>. <br>
+                > 4 - Finalmente nos creará nuestra clase Service (<strong>Client Service</strong>) y añadirá algunas
+                librerías para su uso.
+            </div>
+            <div class="card-body">
+                <a href="img/7.png" target="_blank">
+                    <img src="img/7.png" alt="Paso 7" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible alert-secondary mt-4">
+            Ahora pasaremos al desarrollo del código. ♒
+        </div>
+        <div class="card card-code mt-2">
+            <div class="card-header">
+                1) Creamos nuestra conexión, ubicado en el paquete <strong>com.soap.config</strong>, en la clase
+                <strong>Conexion.java</strong>
+            </div>
+            <div class="card-body">
+                <pre><code class="java">package com.soap.config;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion {
+    Connection conectar = null;
+    
+    // Librería de MySQL
+    public String driver = "com.mysql.jdbc.Driver";
+    // Nombre de la base de datos
+    public String database = "BDSOAP";
+    // Host
+    public String hostname = "localhost";
+    // Puerto
+    public String port = "3306";
+    // Ruta de nuestra base de datos
+    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database;
+    // Nombre de usuario
+    public String username = "root";
+    // Clave de usuario
+    public String password = "";
+
+    public Connection conectar(){
+        try{
+            Class.forName(driver);
+            conectar = DriverManager.getConnection(url, username, password);
+        }catch (ClassNotFoundException | SQLException e){
+            System.out.println("Error al conectar: "+e.getMessage());
+        }
+        return conectar;
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+        <div class="card card-code mt-4">
+            <div class="card-header">
+                2) Creamos nuestra modelo, ubicado en el paquete <strong>com.soap.models</strong>, en la clase
+                <strong>Client.java</strong>
+            </div>
+            <div class="card-body">
+                <pre><code class="java">package com.soap.models;
+
+public class Client {
+
+    private int id;
+    private String name;
+    private String lastname;
+    private String dni;
+
+    public Client() {
+    }
+
+    public Client(int id, String name, String lastname, String dni) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.dni = dni;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+    
+}                    
+                </code></pre>
+            </div>
+        </div>
+        <div class="card card-code mt-4">
+            <div class="card-header">
+                3) Creamos nuestro controlador, ubicado en el paquete <strong>com.soap.controllers</strong>, en la clase
+                <strong>ClientController.java</strong>
+            </div>
+            <div class="card-body">
+                <pre><code class="java">package com.soap.controllers;
+
+import com.soap.config.Conexion;
+import com.soap.models.Client;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class ClientController extends Conexion{
+            
+    Connection con = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
+    //Obtener todos los clientes de la base de datos
+    public List&lt;Client&gt; findAll() throws SQLException{
+        try {
+            String sql = "SELECT * FROM CLIENTS";
+            List&lt;Client&gt; lista = new ArrayList&lt;&gt;();
+            
+            con = conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                Client client = new Client(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4));
+                
+                lista.add(client);
+            }
+            return lista;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally{
+            rs.close();
+            ps.close();
+            con.close();
+        }
+    }
+
+    //Obtener un cliente por su id
+    public Client findById(int id_client) throws SQLException{
+        try {
+            String sql = "SELECT * FROM CLIENTS WHERE id = "+id_client+"";
+            
+            Client client = null;
+            
+            con = conectar();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {                
+                client = new Client(
+                        rs.getInt(1),
+                        rs.getString(2) ,
+                        rs.getString(3),
+                        rs.getString(4));
+                
+            }
+            
+            return client;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } finally{
+            rs.close();
+            ps.close();
+            con.close();
+        }
+    }
+
+    //Crear un nuevo cliente
+    public boolean create(Client client) throws SQLException {
+        try {
+            String sql = "INSERT INTO CLIENTS VALUES(null, ?, ?, ?)";
+            
+            boolean respuesta = false;
+            
+            con = conectar();
+            
+            ps = con.prepareStatement(sql);
+            ps.setString(1, client.getName());
+            ps.setString(2, client.getLastname());
+            ps.setString(3, client.getDni());
+
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+
+    //Actualizar un cliente por su id
+    public boolean update(Client client) throws SQLException {
+        try {
+            String sql = "UPDATE CLIENTS SET name = ?, lastname = ?, dni = ? WHERE id = ?";
+            
+            boolean respuesta = false;
+            
+            con = conectar();
+            
+            ps = con.prepareStatement(sql);
+            ps.setString(1, client.getName());
+            ps.setString(2, client.getLastname());
+            ps.setString(3, client.getDni());
+            ps.setInt(4, client.getId());
+            
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+
+    //Eliminar un cliente por su id
+    public boolean delete(int id_client) throws SQLException {
+        try {
+            String sql = "DELETE FROM CLIENTS WHERE id = "+id_client+"";
+            
+            boolean respuesta = false;
+            
+            con = conectar();            
+            ps = con.prepareStatement(sql);
+            
+            if (ps.executeUpdate() == 1) {                
+                respuesta = true;
+            }
+
+            return respuesta;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } finally{
+            ps.close();
+            con.close();
+        }
+    }
+    
+}                                
+                </code></pre>
+            </div>
+        </div>
+        <div class="card card-code mt-4">
+            <div class="card-header">
+                4) Creamos nuestra servicio, ubicado en el paquete <strong>com.soap.services</strong>, en la clase
+                <strong>ClientService.java</strong>
+            </div>
+            <div class="card-body">
+                <pre><code class="java">package com.soap.services;
+
+import com.soap.controllers.ClientController;
+import com.soap.models.Client;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jws.WebService;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+
+@WebService(serviceName = "ClientService")
+public class ClientService {
+    
+    ClientController clientController = new ClientController();
+
+    //Obtener todos los Clientes
+    @WebMethod(operationName = "findAll")
+    public List&lt;Client&gt; findAll() {
+        try {
+            return clientController.findAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    //Obtener un Cliente por su id
+    @WebMethod(operationName = "findById")
+    public Client findById(@WebParam(name = "id") int id) {
+        try {
+            return clientController.findById(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    //Crear un nuevo Cliente
+    @WebMethod(operationName = "create")
+    public String create(@WebParam(name = "client") Client client) {
+        try {
+            if (clientController.create(client)) {
+                return "Cliente " + client.getName() + " ha sido creado correctamente.";
+            }
+            return "Error al crear el cliente";
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error al realizar la petición";
+        }
+    }
+    
+    //Actualizar un Cliente por su id
+    @WebMethod(operationName = "update")
+    public Client update(@WebParam(name = "client") Client client) {
+        try {
+            Client clientUpdated = null;
+            if (clientController.update(client)) {
+                clientUpdated = clientController.findById(client.getId());
+            }
+            return clientUpdated;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    //Eliminar un Cliente por su id
+    @WebMethod(operationName = "delete")
+    public String delete(@WebParam(name = "id") int id) {
+        try {
+            String msg = "El cliente no se ha podido eliminar";
+            if (clientController.delete(id)) {
+                msg = "El cliente se ha eliminado correctamente";
+            }
+            return msg;
+        } catch (SQLException ex) {
+            Logger.getLogger(ClientService.class.getName()).log(Level.SEVERE, null, ex);
+            return "Error al realizar la petición";
+        }
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="alert alert-dismissible alert-primary mt-4">
+            Finalmente tenemos creado nuestro Servicio <strong>SOAP</strong>. 😎
+        </div>
+        <hr>
+        <div class="alert alert-dismissible alert-secondary">
+            Realizando pruebas con la aplicación de escritorio <a href="https://www.soapui.org/downloads/soapui/" target="_blank" class="alert-link"><strong>SOAP UI</strong></a>. 🐱‍🏍
+        </div>
+
+        <div class="card card-test mt-4">
+            <div class="card-header">
+                ◘ Test - Listar todos los clientes (<strong>findAll</strong>).
+            </div>
+            <div class="card-body">
+                <a href="img/test1.png" target="_blank">
+                    <img src="img/test1.png" alt="Test 1" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+
+        <div class="card card-test mt-4">
+            <div class="card-header">
+                ◘ Test - Listar un cliente por su id (<strong>findById</strong>).
+            </div>
+            <div class="card-body">
+                <a href="img/test2.png" target="_blank">
+                    <img src="img/test2.png" alt="Test 2" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+
+        <div class="card card-test mt-4">
+            <div class="card-header">
+                ◘ Test - Registrar un cliente (<strong>create</strong>).
+            </div>
+            <div class="card-body">
+                <a href="img/test3.png" target="_blank">
+                    <img src="img/test3.png" alt="Test 3" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+
+        <div class="card card-test mt-4">
+            <div class="card-header">
+                ◘ Test - Actualizar un cliente por su id (<strong>update</strong>).
+            </div>
+            <div class="card-body">
+                <a href="img/test4.png" target="_blank">
+                    <img src="img/test4.png" alt="Test 4" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+        
+        <div class="card card-test mt-4">
+            <div class="card-header">
+                ◘ Test - Eliminar un cliente por su id (<strong>delete</strong>).
+            </div>
+            <div class="card-body">
+                <a href="img/test5.png" target="_blank">
+                    <img src="img/test5.png" alt="Test 5" width="100%" height="100%">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="mode" id="changeMode">
+        <span class="mdi mdi-theme-light-dark"></span>
+    </div>
+
+    <div class="alert alert-dismissible alert-banner m-0">
+        Guía creada por Aimar Andony - Team D4SI | 2020 🌌
+    </div>
+
+    <!-- HIGHLIGHT JS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.7.0/dist/highlightjs-line-numbers.min.js"></script>
+
+    <!-- BOOTSTRAP JS, POPPER JS & JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+                hljs.lineNumbersBlock(block);
+            });
+        });
+
+        let changeMode = document.getElementById('changeMode');
+        let modeDark = true;
+
+        changeMode.addEventListener('click',() => {
+            changeMode.classList.toggle('change');
+
+            if(modeDark){
+                $("#mode").attr("href", "https://bootswatch.com/4/superhero/bootstrap.min.css"); //Dark
+                modeDark = false;
+            }else{
+                $("#mode").attr("href", "https://bootswatch.com/4/flatly/bootstrap.min.css"); //Light
+                modeDark = true;
+            }        
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+.hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    text-align: center;
+    color: #ccc;
+    border-right: 1px solid #CCC;
+    vertical-align: top;
+    padding-right: 5px !important;
+}
+.hljs-ln-code {
+    padding-left: 10px !important; 
+}
+
+/* CUSTOM */
+pre{
+    margin: 0;
+}
+.navbar{
+    background: #0c1d58;
+}
+.alert-primary{
+    background: #344379;
+}
+.alert-secondary{
+    background: #346f79;
+}
+.alert-alert{
+    background: #794234;
+}
+.alert-banner{
+    background: #464458;
+    font-size: 14px;
+    text-align: center;
+    color: #b9b9b9;
+    border-radius: 0px !important;
+}
+.card-creation{
+    max-height: 440px;
+}
+.card-code .card-body pre code{
+    max-height: 750px;
+}
+.mode{
+    position: fixed;
+    display: block;
+    top: 100px;
+    left: 0px;
+    background: #131313; 
+    padding: 10px 15px;
+    transition: all .3s ease-in;
+}
+.mode span{
+    color: #fff;
+    font-size: 20px;
+}
+.mode:hover{
+    cursor: pointer;
+    background: #000;
+}
+
+.mode.change{
+    background: #ececec; 
+}
+.mode.change span{
+    color: #0a0a0a;
+}
+.mode.change:hover{
+    background: #f8f8f8;
+}
